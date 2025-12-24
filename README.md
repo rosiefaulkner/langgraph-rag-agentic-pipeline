@@ -87,4 +87,4 @@ By [Sophia Young](https://x.com/sophiamyang) from Mistral & [Lance Martin](https
 ## 🔗 Links
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/rosiefaulkner)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rosiefaulkner/)
-[![Medium Follow](https://seekvectorlogo.com/wp-content/uploads/2021/12/medium-vector-logo-small-2021.png)](https://medium.com/@faulknerproject) 
+[![Medium Follow](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*8WXVVm2poVQkYAh6_Rak5Q.gif)](https://medium.com/@faulknerproject) 
