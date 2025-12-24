@@ -20,24 +20,19 @@ of [Sophia Young](https://x.com/sophiamyang) from Mistral & [Lance Martin](https
 - **Adaptive Information Retrieval**: Creates a system that can switch between local knowledge and web search
 - **State Management**: Implements proper state handling for complex information flows
 
-## Tutorial Structure
-
-Core elements of this Agentic RAG system:
+## Core elements of this Agentic RAG system:
 
 | # | Commit | Description | Key Components |
 |----------|--------|-------------|----------------|
-| 1 | **Start Here** | Introduction to the course and Agentic RAG concepts | Overview of the project; Introduction to LangGraph and Agentic RAG architecture |
-| 2 | **Project Structure** | Setting up the project foundation | Initialize project structure; Configure Poetry for dependency management |
-| 3 | **Ingestion** | Setting up the vector database | Create ingestion pipeline; Implement vector store with Chroma and OpenAI embeddings |
-| 4 | **State** | Defining the state management | Create GraphState class; Set up typed dictionaries for state tracking |
-| 5 | **Retrieve Node** | Implementing the document retrieval | Build retrieve node; Connect retrieval to vector database |
-| 6 | **Grade Documents Node** | Evaluating document relevance | Create document grading functionality; Implement decision logic for document relevance |
-| 7 | **Web Search with Tavily** | Adding external search capability | Integrate Tavily search API; Implement fallback for insufficient local knowledge |
-| 8 | **Generation Node** | Creating the answer generation component | Build generate node; Implement context-aware response generation |
-| 9 | **Graph** | Constructing the complete LangGraph workflow | Connect all nodes into workflow; Implement conditional edges for adaptive behavior |
-| 10 | **Self-RAG** | Adding self-evaluation capabilities | Implement hallucination detection; Create feedback loops for answer improvement |
-| 11 | **Router** | Smart query routing | Create intelligent routing between retrieval and web search; Optimize entry point for different query types |
-| 12 | **Formatting** | Final code formatting and cleanup | Code optimization; Final documentation improvements |
+| 1 | **Ingestion** | Vector database | Creates ingestion pipeline; Implements vector store with Chroma and OpenAI embeddings |
+| 2 | **State** | Defines the state management | Creates GraphState class; Sets up typed dictionaries for state tracking |
+| 3 | **Retrieve Node** | Implements the document retrieval | Builds retrieve node; Connects retrieval to vector database |
+| 4 | **Grade Documents Node** | Evaluats document relevance | Creates document grading functionality; Implements decision logic for document relevance |
+| 5 | **Web Search with Tavily** | Adds external search capability | Integrates Tavily search API; Implements fallback for insufficient local knowledge |
+| 6 | **Generation Node** | Creats the answer generation component | Builds generate node; Implements context-aware response generation |
+| 7 | **Graph** | Constructs the complete LangGraph workflow | Connects all nodes into workflow; Implements conditional edges for adaptive behavior |
+| 8 | **Self-RAG** | Adds self-evaluation capabilities | Implements hallucination detection; Creates feedback loops for answer improvement |
+| 9 | **Router** | Smart query routing | Creates intelligent routing between retrieval and web search; Optimizes entry point for different query types |
 
 ## Environment Variables
 
@@ -45,10 +40,11 @@ To run this project, you will need to add the following environment variables to
 
 ```bash
 OPENAI_API_KEY=your_openai_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
 TAVILY_API_KEY=your_tavily_api_key_here  # For web search capabilities
-LANGCHAIN_API_KEY=your_langchain_api_key_here  # Optional, for tracing
+LANGCHAIN_API_KEY=your_langchain_api_key_here  # Optional, for tracing - Langsmith
 LANGCHAIN_TRACING_V2=true                      # Optional
-LANGCHAIN_PROJECT=agentic-rag                  # Optional
+LANGCHAIN_PROJECT=your_project_name_here       # Optional
 ```
 
 > **Important Note**: If you enable tracing by setting `LANGCHAIN_TRACING_V2=true`, you must have a valid LangSmith API key set in `LANGCHAIN_API_KEY`. Without a valid API key, the application will throw an error.
@@ -65,7 +61,7 @@ poetry install
 
 ## Run Locally
 
-1. Clone the project
+1. Clone the project & start environment
 
 2. Start the Agentic Rag flow
 
