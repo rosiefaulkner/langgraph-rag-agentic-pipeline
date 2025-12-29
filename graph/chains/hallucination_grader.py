@@ -1,8 +1,8 @@
-# for each document we retrieve, we need to grade it for relevance
 import os
 
 from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnableSequence
 from langchain_google_genai import ChatGoogleGenerativeAI
 from pydantic import BaseModel, Field
 
@@ -25,26 +25,26 @@ model = os.getenv(
 llm = ChatGoogleGenerativeAI(model=model, temperature=0, google_api_key=api_key)
 
 
-class GradeDocuments(BaseModel):
+class GradeHallucinations(BaseModel):
     """
-    Binary score for relevance check on retrieved documents.
+    Binary score for hallucination present in generated answer.
     """
 
-    binary_score: str = Field(
-        description="Whether the document is relevant to the question, yes or no"
+    binary_score: bool = Field(
+        description="Answer is grounded in the documents, 'yes' or 'no'"
     )
 
 
-structured_llm_grader = llm.with_structured_output(GradeDocuments)
+structured_llm_grader = llm.with_structured_output(GradeHallucinations)
 
-system = """You are a grader assessing relevance of a retrieved document to a user question. \n 
-    If the document contains keyword(s) or semantic meaning related to the question, grade it as relevant. \n
-    Give a binary score 'yes' or 'no' score to indicate whether the document is relevant to the question."""
-grade_prompt = ChatPromptTemplate.from_messages(
+system = """You are a grader assessing whether an LLM generation is grounded in / supported by a set of retrieved facts. \n 
+     Give a binary score 'yes' or 'no'. 'Yes' means that the answer is grounded in / supported by the set of facts."""
+
+hallucination_prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system),
-        ("human", "Retrieved document: \n\n {document} \n\n User question: {question}"),
+        ("human", "Set of facts: \n\n {documents} \n\n LLM generation: {generation}"),
     ]
 )
 
-retrieval_grader = grade_prompt | structured_llm_grader
+hallucination_grader: RunnableSequence = hallucination_prompt | structured_llm_grader

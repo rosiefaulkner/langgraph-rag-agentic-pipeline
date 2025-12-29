@@ -1,6 +1,6 @@
+from graph.chains import GradeDocuments, retrieval_grader
+from graph.nodes import grade_documents, retrieve, web_search
 from graph.state import GraphState
-from graph.nodes import retrieve, grade_documents, web_search
-from graph.chains import retrieval_grader, GradeDocuments
 
 __all__ = [
     "GraphState",
@@ -10,4 +10,3 @@ __all__ = [
     "retrieval_grader",
     "GradeDocuments",
 ]
-

@@ -18,7 +18,7 @@ def grade_documents(state: GraphState) -> Dict[str, Any]:
     print("---CHECK DOCUMENT RELEVANCE TO QUESTION---")
     question = state["question"]
     documents = state["documents"]
-    
+
     filtered_docs = []
     web_search = False
     for d in documents:
@@ -33,14 +33,14 @@ def grade_documents(state: GraphState) -> Dict[str, Any]:
             print("---GRADE: DOCUMENT NOT RELEVANT---")
             web_search = True
             continue
-    
+
     # Only trigger web search if we have NO relevant documents
     # This means we will return web-search results when the vector database doesn't have good information for this question
     # web_search = len(filtered_docs) == 0
-    
+
     # if web_search:
     #     print(f"---NO RELEVANT DOCUMENTS FOUND ({len(documents)} retrieved, 0 relevant). TRIGGERING WEB SEARCH---")
     # else:
     #     print(f"---FOUND {len(filtered_docs)} RELEVANT DOCUMENT(S) OUT OF {len(documents)} RETRIEVED---")
-    
+
     return {"documents": filtered_docs, "question": question, "web_search": web_search}

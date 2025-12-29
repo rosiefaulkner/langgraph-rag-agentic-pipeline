@@ -1,8 +1,8 @@
-from dotenv import load_dotenv
-import pytest
-from google.api_core.exceptions import ResourceExhausted, PermissionDenied
-
 from pprint import pprint
+
+import pytest
+from dotenv import load_dotenv
+from google.api_core.exceptions import PermissionDenied, ResourceExhausted
 
 load_dotenv()
 
@@ -25,7 +25,9 @@ def test_retrival_grader_answer_yes() -> None:
         )
         assert res.binary_score == "yes"
     except (ResourceExhausted, PermissionDenied) as e:
-        pytest.skip(f"API quota exceeded or permission denied. Error: {str(e)[:100]}. Please wait for quota reset or upgrade your plan.")
+        pytest.skip(
+            f"API quota exceeded or permission denied. Error: {str(e)[:100]}. Please wait for quota reset or upgrade your plan."
+        )
 
 
 def test_retrival_grader_answer_no() -> None:
@@ -39,7 +41,9 @@ def test_retrival_grader_answer_no() -> None:
         )
         assert res.binary_score == "no"
     except (ResourceExhausted, PermissionDenied) as e:
-        pytest.skip(f"API quota exceeded or permission denied. Error: {str(e)[:100]}. Please wait for quota reset or upgrade your plan.")
+        pytest.skip(
+            f"API quota exceeded or permission denied. Error: {str(e)[:100]}. Please wait for quota reset or upgrade your plan."
+        )
 
 
 def test_generation_chain() -> None:
@@ -49,7 +53,9 @@ def test_generation_chain() -> None:
         generation = generation_chain.invoke({"context": docs, "question": question})
         pprint(generation)
     except (ResourceExhausted, PermissionDenied) as e:
-        pytest.skip(f"API quota exceeded or permission denied. Error: {str(e)[:100]}. Please wait for quota reset or upgrade your plan.")
+        pytest.skip(
+            f"API quota exceeded or permission denied. Error: {str(e)[:100]}. Please wait for quota reset or upgrade your plan."
+        )
 
 
 # def test_hallucination_grader_answer_yes() -> None:

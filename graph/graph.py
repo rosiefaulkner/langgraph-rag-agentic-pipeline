@@ -1,8 +1,7 @@
 from dotenv import load_dotenv
-
 from langgraph.graph import END, StateGraph
 
-from graph.consts import RETRIEVE, GRADE_DOCUMENTS, GENERATE, WEB_SEARCH
+from graph.consts import GENERATE, GRADE_DOCUMENTS, RETRIEVE, WEB_SEARCH
 from graph.nodes import generate, grade_documents, retrieve, web_search
 from graph.state import GraphState
 
@@ -11,16 +10,15 @@ load_dotenv()
 
 def decide_to_generate(state):
     print("---ASSESS GRADED DOCUMENTS---")
-    
+
     if state["web_search"]:
-        print(
-            "---DECISION: NOT ALL DOCUMENTS RELEVANT TO QUESTION---"
-        )
+        print("---DECISION: NOT ALL DOCUMENTS RELEVANT TO QUESTION---")
         return WEB_SEARCH
     else:
         print("---DECISION: GENERATE---")
         return GENERATE
-    
+
+
 workflow = StateGraph(GraphState)
 
 workflow.add_node(RETRIEVE, retrieve)
@@ -36,7 +34,7 @@ workflow.add_conditional_edges(
     path_map={
         WEB_SEARCH: WEB_SEARCH,
         GENERATE: GENERATE,
-    }
+    },
 )
 workflow.add_edge(WEB_SEARCH, GENERATE)
 workflow.add_edge(GENERATE, END)
