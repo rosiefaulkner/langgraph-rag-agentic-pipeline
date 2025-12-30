@@ -10,6 +10,7 @@ of [Sophia Young](https://x.com/sophiamyang) from Mistral & [Lance Martin](https
 
 ![Logo](https://github.com/emarco177/langgraph-course/blob/project/agentic-rag/static/Langgraph%20Adaptive%20Rag.png)
 
+<img width="417" height="547" alt="Screenshot 2025-12-30 at 14 08 24" src="https://github.com/user-attachments/assets/d5f7c077-11ea-48d5-9e4f-b3a98bab7a95" />
 
 
 ## What This Repo Achieves
