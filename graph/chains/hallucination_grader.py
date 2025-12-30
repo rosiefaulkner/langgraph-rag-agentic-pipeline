@@ -31,7 +31,10 @@ class GradeHallucinations(BaseModel):
     """
 
     binary_score: bool = Field(
-        description="Answer is grounded in the documents, 'yes' or 'no'"
+        description="Answer is grounded in the facts, 'yes' or 'no'"
+    )
+    reasoning: str = Field(
+        description="Brief explanation of why the score was given."
     )
 
 
