@@ -12,3 +12,6 @@ ANSWER_GRADER = "answer_grader"
 NOT_SUPPORTED = "not supported"
 USEFUL = "useful"
 NOT_USEFUL = "not useful"
+
+# router
+VECTORSTORE = "vectorstore"
