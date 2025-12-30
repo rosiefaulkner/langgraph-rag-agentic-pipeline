@@ -1,11 +1,14 @@
 import os
+
 from dotenv import load_dotenv
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_chroma import Chroma
 from langchain_community.document_loaders import WebBaseLoader
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-os.environ["USER_AGENT"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+os.environ["USER_AGENT"] = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+)
 
 load_dotenv()
 
@@ -17,8 +20,7 @@ urls = [
 
 # Setup Embeddings
 embeddings = GoogleGenerativeAIEmbeddings(
-    model="text-embedding-004",
-    google_api_key=os.getenv("GEMINI_API_KEY")
+    model="text-embedding-004", google_api_key=os.getenv("GEMINI_API_KEY")
 )
 
 persist_dir = "./.chroma"
@@ -63,18 +65,19 @@ if not vectorstore_exists or needs_reindex:
     if needs_reindex:
         # Remove old vectorstore if the embeddings use different model
         import shutil
+
         if os.path.exists(persist_dir):
             shutil.rmtree(persist_dir)
             print("Removed old vectorstore directory")
-    
+
     loader = WebBaseLoader(urls)
     docs_list = loader.load()
-    
+
     text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
         chunk_size=250, chunk_overlap=0
     )
     doc_splits = text_splitter.split_documents(docs_list)
-    
+
     vectorstore = Chroma.from_documents(
         documents=doc_splits,
         collection_name="rag-chroma",
